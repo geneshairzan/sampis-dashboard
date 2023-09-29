@@ -1,0 +1,183 @@
+/* 
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;800;900&display=swap"); */
+
+* {
+  margin: 0;
+}
+
+a {
+  text-decoration: none;
+  color: unset;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f1f1f1;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #888;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #555;
+}
+
+.scrollhide::-webkit-scrollbar {
+  display: none;
+}
+
+@keyframes fadeInAnimation {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
+/* LOGIN STYLE START */
+/* Egg Style */
+
+.bg-grey {
+  background-color: #e7eef0;
+}
+
+.flip {
+  -webkit-transform: scaleX(-1);
+  transform: scaleX(-1);
+}
+
+.no-flip {
+  -webkit-transform: scaleX(1);
+  transform: scaleX(1);
+}
+
+.egg-wrapper {
+  width: 310px;
+  height: 400px;
+  position: absolute;
+  border-radius: 211px;
+  margin-left: 30px;
+  background: #ffffff;
+  filter: blur(20px);
+}
+
+.egg-shadow {
+  width: 210px;
+  height: 12px;
+  background: #8f8b8b;
+  filter: blur(19px);
+  margin: -20px auto;
+  border-radius: 200px;
+}
+
+.auth-wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.auth-card p {
+  font-size: 11px;
+  font-weight: 500;
+}
+
+.auth-card a {
+  opacity: 0.8;
+  transition: all 0.2s;
+  height: 30px;
+  border-radius: 10px;
+  padding: 0;
+}
+
+.auth-card a:hover {
+  opacity: 1;
+  cursor: pointer;
+  box-shadow: 1px 1px 15px #888888;
+  transition: all 0.3s;
+}
+.font-link {
+  font-family: "Inter", sans-serif;
+}
+
+p.auth-header {
+  font-family: "Inter", sans-serif;
+  font-weight: 500;
+  font-size: 26px;
+  padding-bottom: 25px;
+}
+.auth-wrapper img {
+  /* max-width: 380px; */
+}
+
+.auth-card {
+  text-align: center;
+  height: 330px;
+  width: "100%";
+  border-radius: 15px;
+  padding: 10%;
+}
+
+.auth-card .center {
+  justify-content: center;
+  align-items: center;
+}
+
+.social-login-google {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 11px;
+  text-transform: none;
+  letter-spacing: 1px;
+  padding: 8px 18px;
+  margin-top: 24px;
+  margin-bottom: 24px;
+}
+.social-login-google img {
+  margin-left: 10px;
+}
+
+.wallet-connect {
+  margin-top: 10px;
+}
+
+.wallet-connect img {
+  width: 30px;
+  height: 30px;
+}
+
+@media (max-width: 961px) {
+  .bg-grey,
+  html,
+  body {
+    overflow: hidden;
+  }
+  .egg-wrapper {
+    position: absolute;
+    left: 0;
+    max-width: 300px;
+  }
+  .egg-container img {
+    max-width: 400px;
+    left: 0;
+  }
+  .egg-container {
+    position: absolute;
+    max-width: 100%;
+    z-index: 0;
+    padding-top: 20vh;
+  }
+  .auth-card {
+    z-index: 1;
+  }
+
+  .egg-wrapper {
+    width: 310px;
+    height: 350px;
+  }
+}
+/* LOGIN STYLE END */
