@@ -4,10 +4,10 @@
 
 # Best bookmark management ever ! (?)
 
-this aplication still under continues developtment which will add more and more feature soon. (might contain bugs, in short 0_o )<br>
+this aplication still under continues developtment which will add more and more feature coming up soon. (might contain bugs, in short 0_o )<br>
 but yes, this is fully functional already. :) <br>
 installation ? you no need to install anything. <br>
-use it directly at [dashboard.genesha.dev](https://dashboard.genesha.dev)
+use it directly at [dashboard.genesha.dev](https://dashboard.genesha.dev){:target="\_blank"}
 
 leettss gooo... !!!
 
@@ -26,7 +26,7 @@ leettss gooo... !!!
 4. **auto icon**<br/>
    auto detect the icon based on url path
 
-5. **more at [youtube.com](https://youtube.com)**<br/>
+5. **more at [youtube.com](https://youtube.com){:target="\_blank"}**<br/>
    trust me, iam not typical writing guy.
 
 # Installation
