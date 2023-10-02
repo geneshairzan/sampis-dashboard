@@ -47,3 +47,4 @@ if you insist to install your self, you can self deploy this aplication thru :
 
 - dragable orderable bookmark
 - custom icon
+- multiple timezone
