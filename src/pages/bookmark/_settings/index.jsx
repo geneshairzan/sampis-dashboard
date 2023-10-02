@@ -22,9 +22,11 @@ export default function App({ El }) {
   return (
     <UI.Stack>
       <UI.Row justifyContent="flex-end" spacing={2} onClick={() => setmodalopen(true)}>
-        {El || <UI.IconButton color="pwhite" size="small" >
-          <Icon.Gear />
-        </UI.IconButton>}
+        {El || (
+          <UI.IconButton color="pwhite" size="small">
+            <Icon.Gear />
+          </UI.IconButton>
+        )}
       </UI.Row>
       {modalopen && <NewForm onClose={() => setmodalopen(false)} />}
     </UI.Stack>

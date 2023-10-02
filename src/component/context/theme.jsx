@@ -16,12 +16,15 @@ export default function CustomStyles(props) {
     },
 
     secondary: {
-      main: "#e20547",
+      main: "#1e5ba5",
+      dark: "#143e72",
       contrastText: "#fff",
     },
 
     third: {
-      main: "#f24f09",
+      main: "#12b447",
+      dark: "#0e993e",
+      contrastText: "#fff",
     },
 
     pwhite: {
@@ -29,53 +32,8 @@ export default function CustomStyles(props) {
       dark: "#fff",
       light: "#fff",
     },
-    pbrown: {
-      main: "#897a5f",
-      dark: "#554c3b",
-      contrastText: "#fff",
-    },
-    pgreen: {
-      main: "#406860",
-      dark: "#203430",
-      contrastText: "#fff",
-    },
-    google: {
-      main: "#4789f4",
-      dark: "#305ea7",
-      contrastText: "#fff",
-    },
     error: {
       main: "#e63946",
-    },
-    d: {
-      r: "#9d0208",
-      b: "#1e6091",
-      g: "#52b69a",
-    },
-
-    grey: {
-      a: "#9c9fac",
-      b: "#575960",
-      c: "#35363a",
-    },
-
-    lOrang: {
-      main: "#f24f09",
-      dark: "#bf3e07",
-      contrastText: "#fff",
-    },
-    lBlue: {
-      main: "#1e5ba5",
-      dark: "#143e72",
-      // contrastText: "#000",
-      contrastText: "#fff",
-    },
-
-    lGreen: {
-      main: "#12b447",
-      dark: "#0e993e",
-      // contrastText: "#000",
-      contrastText: "#fff",
     },
   };
 
@@ -83,39 +41,6 @@ export default function CustomStyles(props) {
     palette: color,
     typography: {
       fontSize: 12,
-      h4: {
-        fontSize: 33,
-        xs: {
-          fontSize: 12,
-        },
-      },
-      h6: {
-        fontSize: 20,
-        [dtehme.breakpoints.up("sm")]: {
-          fontSize: 16,
-        },
-      },
-      menu: {
-        fontSize: 14,
-      },
-      body1: {
-        fontSize: 14,
-        [dtehme.breakpoints.up("sm")]: {
-          fontSize: 16,
-        },
-      },
-      body2: {
-        fontSize: 12,
-        [dtehme.breakpoints.up("sm")]: {
-          fontSize: 14,
-        },
-      },
-      subtitle1: {
-        fontSize: 10,
-        [dtehme.breakpoints.up("sm")]: {
-          fontSize: 12,
-        },
-      },
     },
     components: {
       MuiTextField: {

@@ -6,6 +6,7 @@ import Loader from "./apploader";
 import Modal from "./modal";
 import Divider from "./divider";
 import Accordion from "./accordion";
+import ActionConfirm from "./actionConfirm";
 
 import DTSearch from "./datatables/search";
 import DTFilter from "./datatables/filter";
@@ -29,6 +30,7 @@ const UI = {
     search,
     order,
   },
+  ActionConfirm,
 };
 
 export default UI;

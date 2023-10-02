@@ -35,14 +35,18 @@ export default function App(props) {
       <BMPrimary data={bm.data.filter((d) => d.group == -1)} />
       <BMSecondary data={bm.data.filter((d) => !d.group || d.group == 0)} />
       <Search value={search} onChange={setsearch} />
-      <UI.Col flexGrow={1} justifyContent='space-between'>
+      <UI.Col flexGrow={1} justifyContent="space-between">
         <BMTertier data={bm.data.filter((d) => d.group == 1)} search={search} />
-        <UI.Row justifyContent='flex-end' alignItems='center' spacing={2}>
-          <Setting />
-          <NewBookmark />
+        <UI.Row justifyContent="space-between">
+          <UI.Button variant="text" component="a" href="https://genesha.dev/" rel="noopener noreferrer" target="_blank">
+            @geneshadev
+          </UI.Button>
+          <UI.Row justifyContent="flex-end" alignItems="center" spacing={2}>
+            <Setting />
+            <NewBookmark />
+          </UI.Row>
         </UI.Row>
       </UI.Col>
     </UI.Col>
   );
 }
-

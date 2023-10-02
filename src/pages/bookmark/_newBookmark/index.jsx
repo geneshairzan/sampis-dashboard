@@ -22,7 +22,7 @@ export default function App(props) {
   return (
     <UI.Stack>
       <UI.Row justifyContent="flex-end" spacing={2}>
-        <UI.Button startIcon={<Icon.Plus />} color="lOrang" size="small" onClick={() => setmodalopen(true)}>
+        <UI.Button startIcon={<Icon.Plus />} size="small" onClick={() => setmodalopen(true)}>
           bookmark
         </UI.Button>
       </UI.Row>

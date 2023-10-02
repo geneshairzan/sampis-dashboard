@@ -8,6 +8,7 @@ import h from "@gh/helper";
 import { useFormik } from "formik";
 import * as yup from "yup";
 import Context from "@context";
+import BackupRestore from "./backuprestore";
 
 const validationSchema = yup.object({
   // name: yup.string("").required("required"),
@@ -18,17 +19,6 @@ const validationSchema = yup.object({
 export default function NewForm({ onClose, refdata }) {
   const { app, setapp } = React.useContext(Context);
 
-  const formik = useFormik({
-    initialValues: {
-      searchtag: app?.searchtag || [],
-      isShowPrayer: app?.isShowPrayer
-    },
-    validationSchema: validationSchema,
-    onSubmit: (values) => {
-      setapp({ ...app, ...values })
-      onClose(true);
-    },
-  });
   return (
     <UI.Modal open={true}>
       <UI.Col
@@ -43,20 +33,23 @@ export default function NewForm({ onClose, refdata }) {
           <UI.Text variant="h4" color="primary" bold>
             Settings
           </UI.Text>
-          <UI.IconButton color="lOrang" onClick={onClose}>
+          <UI.IconButton onClick={onClose}>
             <Icon.Close />
           </UI.IconButton>
         </UI.Row>
         <Form.SearchTag
           label="Serach Tag"
-          name="searchtag"
           searchtag
-          value={formik.values.searchtag}
-          onChange={formik.handleChange}
-
+          value={app?.searchtag || []}
+          onChange={(e) => setapp({ ...app, searchtag: e.target.value })}
         />
-        <Form.Switch value={formik.values.isShowPrayer} onChange={formik.handleChange} name='isShowPrayer' label='show prayer widget' />
-        <UI.Button onClick={formik.handleSubmit}>Complete</UI.Button>
+        <Form.Switch
+          value={app?.isShowPrayer}
+          onChange={(e) => setapp({ ...app, isShowPrayer: e.target.value })}
+          label="show prayer widget"
+        />
+
+        <BackupRestore />
       </UI.Col>
     </UI.Modal>
   );

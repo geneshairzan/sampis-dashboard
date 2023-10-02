@@ -27,14 +27,14 @@ export default function App({ data, search }) {
       pos:
         contextMenu === null
           ? {
-            mouseX: event.clientX + 2,
-            mouseY: event.clientY - 6,
-          }
+              mouseX: event.clientX + 2,
+              mouseY: event.clientY - 6,
+            }
           : null,
     });
   };
 
-  const handleClose = () => setContextMenu(null)
+  const handleClose = () => setContextMenu(null);
 
   return (
     <UI.Col>
@@ -43,7 +43,7 @@ export default function App({ data, search }) {
           ?.filter(fnSearch)
           .sort((a, b) => (a.path > b.path ? -1 : 1))
           .map((d, ix) => (
-            <UI.Grid item xs={12} sm={6} md={3} xl={2}>
+            <UI.Grid item xs={12} sm={6} md={3} xl={2} key={ix}>
               <UI.Row
                 onContextMenu={(e) => handleContextMenu(e, d)}
                 key={ix}

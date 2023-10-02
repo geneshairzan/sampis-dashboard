@@ -48,7 +48,7 @@ export default function NewForm({ onClose, refdata, primary }) {
           <UI.Text variant="h4" color="primary" bold>
             {refdata ? "Edit Bookmark" : "New Bookmark"}
           </UI.Text>
-          <UI.IconButton color="lOrang" onClick={onClose}>
+          <UI.IconButton onClick={onClose}>
             <Icon.Close />
           </UI.IconButton>
         </UI.Row>

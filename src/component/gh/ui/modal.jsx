@@ -16,6 +16,8 @@ export default function BasicModal(props) {
           top: "50%",
           right: "50%",
           transform: "translate(50%,-50%)",
+          borderRadius: 3,
+          overflow: "hidden",
         }}
       >
         {props.children}
