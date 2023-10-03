@@ -18,6 +18,11 @@ const validationSchema = yup.object({
 
 export default function NewForm({ onClose, refdata }) {
   const { app, setapp } = React.useContext(Context);
+  let getBookmarks = browser.bookmarks.get(
+    idOrIdList // string or string array
+  );
+
+  console.log(getBookmarks);
 
   return (
     <UI.Modal open={true}>

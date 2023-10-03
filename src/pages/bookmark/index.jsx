@@ -37,7 +37,7 @@ export default function App(props) {
       <Search value={search} onChange={setsearch} />
       <UI.Col flexGrow={1} justifyContent="space-between">
         <BMTertier data={bm.data.filter((d) => d.group == 1)} search={search} />
-        <UI.Row justifyContent="space-between">
+        <UI.Row justifyContent="space-between" alignItems="center">
           <UI.Button variant="text" component="a" href="https://genesha.dev/" rel="noopener noreferrer" target="_blank">
             @geneshadev
           </UI.Button>
