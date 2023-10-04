@@ -9,12 +9,27 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Context from "@context";
 
-const URL = /^((https?|ftp):\/\/)?(www.)?(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i
+const URL =
+  /^((https?|ftp):\/\/)?(www.)?(((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:)*@)?(((\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5])\.(\d|[1-9]\d|1\d\d|2[0-4]\d|25[0-5]))|((([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|\d|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.)+(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])*([a-z]|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])))\.?)(:\d*)?)(\/((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)+(\/(([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)*)*)?)?(\?((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|[\uE000-\uF8FF]|\/|\?)*)?(\#((([a-z]|\d|-|\.|_|~|[\u00A0-\uD7FF\uF900-\uFDCF\uFDF0-\uFFEF])|(%[\da-f]{2})|[!\$&'\(\)\*\+,;=]|:|@)|\/|\?)*)?$/i;
+const regMatch =
+  /^((http|https):\/\/)?(www.)?(?!.*(http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+(\/)?.([\w\?[a-zA-Z-_%\/@?]+)*([^\/\w\?[a-zA-Z0-9_-]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/;
+
+const isValidUrl = (url) => {
+  if (url.includes("https://localhost") || url.includes("http://localhost")) return true;
+
+  try {
+    new URL(url);
+  } catch (e) {
+    return false;
+  }
+  return true;
+};
 
 const validationSchema = yup.object({
   name: yup.string("").required("required"),
   // path: yup.string().matches(URL, 'Enter valid url!').required("required"),
-  path: yup.string().url('Enter valid url').required("required"),
+  // path: yup.string().matches(regMatch, "Enter correct url!").required("required"),
+  path: yup.string().test("is-url-valid", "URL is not valid", (value) => isValidUrl(value)),
   group: yup.string("").required("required"),
 });
 export default function NewForm({ onClose, refdata, primary }) {
@@ -69,38 +84,39 @@ export default function NewForm({ onClose, refdata, primary }) {
           error={formik.touched.path && Boolean(formik.errors.path)}
           helperText={formik.touched.path && formik.errors.path}
         />
-        {!primary && <>
+        {!primary && (
+          <>
+            <Form.Text
+              label="Desc"
+              name="desc"
+              value={formik.values.desc}
+              onChange={formik.handleChange}
+              error={formik.touched.desc && Boolean(formik.errors.desc)}
+              helperText={formik.touched.desc && formik.errors.desc}
+            />
 
-          <Form.Text
-            label="Desc"
-            name="desc"
-            value={formik.values.desc}
-            onChange={formik.handleChange}
-            error={formik.touched.desc && Boolean(formik.errors.desc)}
-            helperText={formik.touched.desc && formik.errors.desc}
-          />
-
-
-          <Form.BMGroup
-            label="Group"
-            name="group"
-            value={formik.values.group}
-            onChange={formik.handleChange}
-            error={formik.touched.group && Boolean(formik.errors.group)}
-            helperText={formik.touched.group && formik.errors.group}
-          />
-          <Form.Checkbox
-            label="show in dashboard"
-            name="isShow"
-            value={formik.values.isShow}
-            onChange={formik.handleChange}
-          />
-          <Form.Checkbox
-            label="disable icon"
-            name="isNotIcon"
-            value={formik.values.isNotIcon}
-            onChange={formik.handleChange}
-          /></>}
+            <Form.BMGroup
+              label="Group"
+              name="group"
+              value={formik.values.group}
+              onChange={formik.handleChange}
+              error={formik.touched.group && Boolean(formik.errors.group)}
+              helperText={formik.touched.group && formik.errors.group}
+            />
+            <Form.Checkbox
+              label="show in dashboard"
+              name="isShow"
+              value={formik.values.isShow}
+              onChange={formik.handleChange}
+            />
+            <Form.Checkbox
+              label="disable icon"
+              name="isNotIcon"
+              value={formik.values.isNotIcon}
+              onChange={formik.handleChange}
+            />
+          </>
+        )}
 
         <UI.Button onClick={formik.handleSubmit}>Complete</UI.Button>
       </UI.Col>

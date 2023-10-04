@@ -70,7 +70,7 @@ function RenderList({ data, onReset }) {
 
   const paginate = {
     perpage: 20,
-    current: 0,
+    current: 2,
   };
 
   useEffect(() => {

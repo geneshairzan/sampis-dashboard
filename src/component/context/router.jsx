@@ -15,8 +15,6 @@ const router = Object.keys(ROUTESLIST).map((route) => {
   return { path, component: ROUTESLIST[route].default, plain: route };
 });
 
-
-
 const preserved = Object.keys(PRESERVED).reduce((preserved, file) => {
   const key = file.replace("../pages", "").replace(/\/src\/pages\/|\.jsx$/g, "");
   return { ...preserved, [key]: PRESERVED[file].default };
@@ -29,7 +27,6 @@ export default function App(params) {
     <BrowserRouter>
       <AppProvider>
         <Routes>
-
           <Route element={<App />}>
             {router.map((d, ix) => (
               <Route key={ix} path={d.path} element={<d.component />} />

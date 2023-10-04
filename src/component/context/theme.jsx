@@ -60,7 +60,6 @@ export default function CustomStyles(props) {
         defaultProps: {
           variant: "contained",
           color: "primary",
-          className: "f-capitalize",
         },
         styleOverrides: {
           containedSecondary: {

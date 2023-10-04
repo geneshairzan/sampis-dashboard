@@ -8,14 +8,6 @@ import id from "@/assets/lang/id.json";
 import en from "@/assets/lang/en.json";
 
 export default function Typo(props) {
-  const [activelang, setactivelang] = useState(id);
-  // const { app } = React.useContext(Context);
-
-  useEffect(() => {
-    //fetching lang json
-    // setactivelang(app.lang || id);
-  }, []);
-
   return (
     <Typography
       className="font-link"

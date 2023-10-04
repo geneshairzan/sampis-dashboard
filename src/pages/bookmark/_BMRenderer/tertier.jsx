@@ -93,11 +93,7 @@ export default function App({ data, search }) {
               </UI.Row>
             </UI.Grid>
           ))}
-        <ContextMenu
-          // activeContext={activeContext}
-          contextMenu={contextMenu}
-          onClose={handleClose}
-        />
+        <ContextMenu contextMenu={contextMenu} onClose={handleClose} />
       </UI.Grid>
     </UI.Col>
   );
