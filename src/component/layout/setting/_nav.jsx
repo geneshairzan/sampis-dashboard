@@ -4,6 +4,10 @@ const nav = [
     path: "/settings",
   },
   {
+    name: "Theming",
+    path: "/settings/theme",
+  },
+  {
     name: "Bookmark manager",
     path: "/settings/bookmark",
   },

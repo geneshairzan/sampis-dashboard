@@ -48,9 +48,8 @@ if you insist to install your self, you can self deploy this aplication thru :
 - dragable orderable bookmark
 - custom icon
 - multiple timezone
-  ✅ import from chrome
+- import from chrome ✅
 - theming
 - bg-img
 - stackable / folder bookmark
-
-- layouting advance config
+- layouting advance config ✅
