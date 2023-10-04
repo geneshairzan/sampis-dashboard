@@ -6,6 +6,7 @@ import ChevronLeftIcon from "@mui/icons-material/ChevronLeft";
 import useMediaQuery from "@mui/material/useMediaQuery";
 import Context from "@context";
 import Menus from "./_menuRenderer";
+import SaveIcon from "@mui/icons-material/Save";
 
 import {
   Box,
@@ -21,32 +22,9 @@ import {
   Typography,
   ClickAwayListener,
 } from "@mui/material";
-
+import { Link } from "react-router-dom";
 // import LoadingScreen from "@component/app/overlay";
 // import Logo from "@img/logogram.png";
-
-function Layout({ children }) {
-  return (
-    <UI.Col
-      sx={{
-        width: "100vw",
-        height: "100vh",
-        userSelect: "none",
-        WebkitUserSelect: "none",
-        msUserSelect: "none",
-        overflowY: "auto",
-        overflowX: "hidden",
-        "> div": {
-          flexGrow: 1,
-        },
-      }}
-      px={5}
-      py={3}
-    >
-      {children}
-    </UI.Col>
-  );
-}
 
 export default function Dashboard({ isFull = true, children }) {
   const { app } = React.useContext(Context);
@@ -77,10 +55,21 @@ export default function Dashboard({ isFull = true, children }) {
               width: "100%",
               py: 3,
               px: 5,
-              zIndex: 99,
             }}
           >
-            {children}
+            <UI.Col
+              sx={{
+                height: "100%",
+                width: "100%",
+              }}
+            >
+              {children}
+            </UI.Col>
+            <UI.Row justifyContent="flex-end">
+              <UI.Button LinkComponent={Link} size="small" to="/" startIcon={<SaveIcon />}>
+                Save & Exit
+              </UI.Button>
+            </UI.Row>
           </UI.Col>
         </UI.Row>
       </UI.Col>

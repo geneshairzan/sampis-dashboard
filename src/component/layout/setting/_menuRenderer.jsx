@@ -9,7 +9,6 @@ import { Link, useLocation } from "react-router-dom";
 import Icon from "@gh/icon";
 
 import Collapse from "@mui/material/Collapse";
-import SaveIcon from "@mui/icons-material/Save";
 export default function DesktopMenu({ onClick }) {
   return (
     <UI.Col
@@ -34,11 +33,7 @@ export default function DesktopMenu({ onClick }) {
           </UI.Col>
         ))}
       </UI.Col>
-      <UI.Col p={2}>
-        <UI.Button LinkComponent={Link} to="/" startIcon={<SaveIcon />}>
-          Save & Exit
-        </UI.Button>
-      </UI.Col>
+      <UI.Col p={2}></UI.Col>
     </UI.Col>
   );
 }
