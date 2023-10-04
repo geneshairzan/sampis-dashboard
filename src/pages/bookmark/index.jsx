@@ -15,22 +15,7 @@ export default function App(props) {
   const { app, bm } = React.useContext(Context);
   const [search, setsearch] = useState("");
   return (
-    <UI.Col
-      sx={{
-        width: "100vw",
-        height: "100vh",
-        flexGrow: 1,
-        bgcolor: "#191d26",
-        userSelect: "none",
-        WebkitUserSelect: "none",
-        msUserSelect: "none",
-        overflowY: "auto",
-        overflowX: "hidden",
-      }}
-      px={5}
-      py={3}
-      spacing={5}
-    >
+    <UI.Col spacing={5}>
       <Clock isShowPrayer={app.isShowPrayer} />
       <BMPrimary data={bm.data.filter((d) => d.group == -1)} />
       <BMSecondary data={bm.data.filter((d) => !d.group || d.group == 0)} />

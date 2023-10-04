@@ -10,19 +10,8 @@ import * as yup from "yup";
 import Context from "@context";
 import BackupRestore from "./backuprestore";
 
-const validationSchema = yup.object({
-  // name: yup.string("").required("required"),
-  // path: yup.string("").required("required"),
-  // group: yup.string("").required("required"),
-});
-
 export default function NewForm({ onClose, refdata }) {
   const { app, setapp } = React.useContext(Context);
-  let getBookmarks = browser.bookmarks.get(
-    idOrIdList // string or string array
-  );
-
-  console.log(getBookmarks);
 
   return (
     <UI.Modal open={true}>

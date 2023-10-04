@@ -1,7 +1,7 @@
 import { Stack, Button, IconButton, Grid } from "@mui/material";
 import Row from "./row";
 import Col from "./col";
-import Text from "./typography";
+import Text, { Elipsis } from "./typography";
 import Loader from "./apploader";
 import Modal from "./modal";
 import Divider from "./divider";
@@ -19,6 +19,7 @@ const UI = {
   Row,
   Col,
   Text,
+  Elipsis,
   Button,
   IconButton,
   Loader,

@@ -83,12 +83,12 @@ export default function App({ data, search }) {
                 )}
 
                 <UI.Col>
-                  <UI.Text bold variant="body2" color={"white"} className="BM-Title">
+                  <UI.Elipsis bold variant="body2" color={"white"} className="BM-Title">
                     {d.name}
-                  </UI.Text>
-                  <UI.Text variant="caption" color={"grey"} mt={"-4px"}>
+                  </UI.Elipsis>
+                  <UI.Elipsis variant="caption" color={"grey"} mt={"-4px"}>
                     {d.desc || getDomain(d.path)}
-                  </UI.Text>
+                  </UI.Elipsis>
                 </UI.Col>
               </UI.Row>
             </UI.Grid>

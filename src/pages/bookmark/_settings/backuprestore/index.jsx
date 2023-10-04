@@ -7,6 +7,8 @@ import Icon from "@gh/icon";
 import Context from "@context";
 import BackupIcon from "@mui/icons-material/Backup";
 import CloudDownloadIcon from "@mui/icons-material/CloudDownload";
+import { Link } from "react-router-dom";
+
 export default function App(props) {
   return (
     <UI.Stack spacing={2}>
@@ -15,7 +17,12 @@ export default function App(props) {
       <UI.Row spacing={2}>
         <Backup />
         <Restore />
+      </UI.Row>
+      <UI.Row spacing={2}>
         <Reset />
+        <UI.Button fullWidth LinkComponent={Link} to="/import/chrome" target="_blank" rel="noopener noreferrer">
+          Chrome Import
+        </UI.Button>
       </UI.Row>
     </UI.Stack>
   );
