@@ -4,7 +4,7 @@ export default function App(props) {
   return (
     <UI.Stack>
       <UI.Text variant="h4" bold color="primary">
-        Bookmark List
+        About
       </UI.Text>
     </UI.Stack>
   );

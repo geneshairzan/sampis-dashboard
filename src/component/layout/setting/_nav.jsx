@@ -15,6 +15,10 @@ const nav = [
     name: "Import",
     path: "/settings/import",
   },
+  {
+    name: "About",
+    path: "/settings/about",
+  },
 ];
 
 export { nav };
