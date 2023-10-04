@@ -8,6 +8,7 @@ export default function App({ noLabel = false, ...props }) {
     <Stack spacing={0.5} width={props.fullWidth ? "100%" : "auto"}>
       {!noLabel && <Label label={props.label} tip={props.tip} />}
       <TextField
+        {...props}
         sx={{
           ...props.sx,
           "& .MuiFormHelperText-root": {

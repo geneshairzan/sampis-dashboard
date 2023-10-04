@@ -111,13 +111,13 @@ function RenderList({ data, onReset }) {
             <Form.Checkbox onChange={toggleAll} value={allcheck} />
           </UI.Col>
 
-          <UI.Text variant="h6" color="white" width="20%">
+          <UI.Text variant="h6" width="20%">
             Title / Name
           </UI.Text>
-          <UI.Text variant="h6" color="white" width="20%">
+          <UI.Text variant="h6" width="20%">
             Path
           </UI.Text>
-          <UI.Text variant="h6" color="white" width="20%">
+          <UI.Text variant="h6" width="20%">
             Group
           </UI.Text>
         </UI.Row>
@@ -138,7 +138,7 @@ function RenderList({ data, onReset }) {
 function ListItem({ data, onChange, onDelete }) {
   return (
     <UI.Row spacing={2} width="100%">
-      <Form.Checkbox value={data.checked} color="white" onChange={(e) => onChange("checked", e.target.value)} />
+      <Form.Checkbox value={data.checked} onChange={(e) => onChange("checked", e.target.value)} />
       <UI.Col width="20%">
         <Form.Text
           value={data.name}

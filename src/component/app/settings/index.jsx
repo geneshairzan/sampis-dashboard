@@ -9,7 +9,6 @@ import { useFormik } from "formik";
 import * as yup from "yup";
 import Context from "@context";
 import NewForm from "./_form";
-import { Link } from "react-router-dom";
 
 const validationSchema = yup.object({
   name: yup.string("").required("required"),
@@ -22,17 +21,14 @@ export default function App({ El }) {
 
   return (
     <UI.Stack>
-      <UI.IconButton color="pwhite" size="small" LinkComponent={Link} to="/settings">
-        <Icon.Gear />
-      </UI.IconButton>
-      {/* <UI.Row justifyContent="flex-end" spacing={2} onClick={() => setmodalopen(true)}>
+      <UI.Row justifyContent="flex-end" spacing={2} onClick={() => setmodalopen(true)}>
         {El || (
           <UI.IconButton color="pwhite" size="small">
             <Icon.Gear />
           </UI.IconButton>
         )}
       </UI.Row>
-      {modalopen && <NewForm onClose={() => setmodalopen(false)} />} */}
+      {modalopen && <NewForm onClose={() => setmodalopen(false)} />}
     </UI.Stack>
   );
 }

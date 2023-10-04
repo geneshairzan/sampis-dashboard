@@ -1,34 +1,23 @@
-import { Outlet } from "react-router-dom";
+import { Outlet, useLocation } from "react-router-dom";
 import UI from "@gh/ui";
 
-export default function App() {
-  return (
-    <Layout>
-      <Outlet />
-    </Layout>
-  );
-}
+import MainLayout from "@component/layout/bookmark-theme";
+import SettingLayout from "@/component/layout/setting";
 
-function Layout({ children }) {
+export default function App() {
+  const loc = useLocation();
+
+  if (loc.pathname.includes("settings")) {
+    return (
+      <SettingLayout>
+        <Outlet />
+      </SettingLayout>
+    );
+  }
+
   return (
-    <UI.Col
-      sx={{
-        width: "100vw",
-        height: "100vh",
-        bgcolor: "#191d26",
-        userSelect: "none",
-        WebkitUserSelect: "none",
-        msUserSelect: "none",
-        overflowY: "auto",
-        overflowX: "hidden",
-        "> div": {
-          flexGrow: 1,
-        },
-      }}
-      px={5}
-      py={3}
-    >
-      {children}
-    </UI.Col>
+    <MainLayout>
+      <Outlet />
+    </MainLayout>
   );
 }
