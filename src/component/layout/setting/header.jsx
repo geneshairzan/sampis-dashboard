@@ -23,14 +23,15 @@ export default function App({ grey = false }) {
       alignItems="center"
       p={2}
     >
-      <UI.Row spacing={2}>
-        <UI.Text variant="h4" bold>
+      <UI.Row spacing={2}></UI.Row>
+      <UI.Col alignItems="flex-end">
+        <UI.Text variant="h5" bold component={Link} to="/">
+          SAMPIS BOOKMARK
+        </UI.Text>
+        <UI.Text variant="h6" bold color="primary">
           Settings
         </UI.Text>
-      </UI.Row>
-      <UI.Text variant="h4" bold component={Link} to="/">
-        SAMPIS BOOKMARK
-      </UI.Text>
+      </UI.Col>
     </UI.Row>
   );
 }

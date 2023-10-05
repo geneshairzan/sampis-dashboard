@@ -4,8 +4,9 @@ export default function App(props) {
   return (
     <UI.Stack spacing={2}>
       <UI.Text variant="h4" bold color="primary">
-        Bookmark List
+        Theming
       </UI.Text>
+
       <UI.Text variant="h5">This feature under development</UI.Text>
     </UI.Stack>
   );

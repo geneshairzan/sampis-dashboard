@@ -69,6 +69,7 @@ function NewTag() {
   let open = useBool();
 
   function handleChange(e) {
+    if (!val.length) return;
     open.set.close();
     setval("");
     setapp({ ...app, searchtag: app?.searchtag ? [...app?.searchtag, val] : [val] });

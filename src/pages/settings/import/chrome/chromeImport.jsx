@@ -130,7 +130,7 @@ function RenderList({ data, onReset }) {
           />
         ))}
       </UI.Col>
-      <UI.Button onClick={handleAdd}>Add To Bookmark</UI.Button>
+      <UI.Button onClick={handleAdd}>Add {raw.data.length} item To Bookmark</UI.Button>
     </UI.Col>
   );
 }

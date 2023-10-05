@@ -53,23 +53,33 @@ export default function Dashboard({ isFull = true, children }) {
             sx={{
               height: "100%",
               width: "100%",
-              py: 3,
-              px: 5,
+              pt: 3,
             }}
           >
             <UI.Col
               sx={{
                 height: "100%",
+                maxHeight: "calc(100%)",
                 width: "100%",
+                flexGrow: "auto",
+                overflow: "auto",
+                px: 5,
               }}
             >
               {children}
             </UI.Col>
-            <UI.Row justifyContent="flex-end">
-              <UI.Button LinkComponent={Link} size="small" to="/" startIcon={<SaveIcon />}>
+            {/* <UI.Row justifyContent="flex-end" bgcolor="primary.main" p={1}>
+              <UI.Button
+                variant="outlined"
+                color="pwhite"
+                LinkComponent={Link}
+                size="small"
+                to="/"
+                startIcon={<SaveIcon />}
+              >
                 Save & Exit
               </UI.Button>
-            </UI.Row>
+            </UI.Row> */}
           </UI.Col>
         </UI.Row>
       </UI.Col>
