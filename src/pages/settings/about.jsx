@@ -8,6 +8,18 @@ export default function App(props) {
         About
       </UI.Text>
 
+      <UI.Col center>
+        <iframe
+          width="560"
+          height="315"
+          src="https://www.youtube.com/embed/zuKQuRuSkEc?si=sFx0PCIjXPS5lg6z"
+          title="YouTube video player"
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+          allowfullscreen
+        ></iframe>
+      </UI.Col>
+
       <UI.Col
         component="a"
         href="https://github.com/geneshairzan/sampis-dashboard"
