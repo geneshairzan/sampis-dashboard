@@ -87,7 +87,7 @@ export default function NewForm({ onClose, refdata, primary }) {
         {!primary && (
           <>
             <Form.Text
-              label="Desc"
+              label="Desc | Tag"
               name="desc"
               value={formik.values.desc}
               onChange={formik.handleChange}
