@@ -28,10 +28,7 @@ export default function App({ data }) {
   return (
     <Stack direction={"row"} spacing={2} maxWidth={"100vw"} overflow="auto">
       {data?.map((d, ix) => (
-        <>
-          {console.log(d)}{" "}
-          <IconBtn key={ix} title={d.name} to={d.path} onContextMenu={(e) => handleContextMenu(e, d)} />
-        </>
+        <IconBtn key={ix} title={d.name} to={d.path} onContextMenu={(e) => handleContextMenu(e, d)} />
       ))}
       <ContextMenu contextMenu={contextMenu} onClose={handleClose} />
     </Stack>

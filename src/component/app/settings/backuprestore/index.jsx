@@ -33,7 +33,7 @@ function Backup() {
     )}`;
     const link = document.createElement("a");
     link.href = jsonString;
-    link.download = "data.json";
+    link.download = "bookmark-backup.json";
 
     link.click();
     sethasBackup(true);
@@ -79,15 +79,20 @@ function Restore() {
 }
 
 function Reset(params) {
+  const { bm, appreset } = React.useContext(Context);
+
   const [hasReset, sethasReset] = useState(false);
   function handleReset() {
+    bm.reset();
+    appreset();
+
     localStorage.clear();
     sethasReset(true);
   }
   return (
     <UI.ActionConfirm
       title="Are your sure want to reset ? "
-      desc="after reset, every data will removed permanently !"
+      desc="Every data will removed permanently !"
       fullWidth
       color="error"
       onClick={handleReset}

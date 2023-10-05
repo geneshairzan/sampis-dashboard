@@ -16,5 +16,6 @@ export default function App(props) {
   return {
     app,
     setapp,
+    appreset: () => setapp(default_setting),
   };
 }

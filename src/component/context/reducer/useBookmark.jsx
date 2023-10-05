@@ -48,6 +48,7 @@ export default function App() {
     pop,
     edit,
     set,
+    reset: () => set(default_bookmark),
   };
 }
 

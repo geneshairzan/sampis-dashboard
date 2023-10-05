@@ -6,13 +6,14 @@ import useapp from "./reducer/useapp";
 import usebookmark from "./reducer/useBookmark";
 
 export default function App(props) {
-  const { app, setapp, } = useapp();
+  const { app, setapp, appreset } = useapp();
   const bm = usebookmark();
   return (
     <Context.Provider
       value={{
         app,
         setapp,
+        appreset,
         bm,
       }}
     >
