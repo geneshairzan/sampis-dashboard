@@ -48,7 +48,7 @@ function Backup() {
 
 function Restore() {
   const ref = useRef();
-  const { bm, app } = React.useContext(Context);
+  const { bm, app, setapp } = React.useContext(Context);
   const [hasRestore, sethasRestore] = useState(false);
 
   const handleChange = (e) => {
@@ -58,7 +58,7 @@ function Restore() {
       sethasRestore(true);
       let raw = JSON.parse(e.target.result);
       bm.set(raw.bookmark);
-      app.setapp(raw.setting);
+      setapp(raw.setting);
     };
   };
 
