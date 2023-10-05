@@ -13,6 +13,7 @@ import ImgCrop from "./gip-imagecrop";
 import Qrcode from "./inputBarcode";
 import BMGroup from "./selectGroup";
 import SearchTag from "./inputSearchTag";
+import Select from "./inputSelect";
 
 const Form = {
   Text,
@@ -28,7 +29,8 @@ const Form = {
   ImgCrop,
   Qrcode,
   BMGroup,
-  SearchTag
+  SearchTag,
+  Select,
 };
 
 export default Form;

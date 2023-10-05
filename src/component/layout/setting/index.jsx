@@ -53,7 +53,7 @@ export default function Dashboard({ isFull = true, children }) {
             sx={{
               height: "100%",
               width: "100%",
-              pt: 3,
+              py: 3,
             }}
           >
             <UI.Col
