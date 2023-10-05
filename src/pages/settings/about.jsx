@@ -19,6 +19,22 @@ export default function App(props) {
       >
         <img src={github} alt="" />
       </UI.Col>
+
+      <UI.Text>
+        any feedback related to this application, please email support at{" "}
+        <UI.Text
+          component="a"
+          href="mailto: bookmark@genesha-dev.com"
+          sx={{
+            color: "primary.main",
+            "&:hover": {
+              color: "primary.dark",
+            },
+          }}
+        >
+          {`bookmark@genesha-dev.com`}
+        </UI.Text>
+      </UI.Text>
     </UI.Stack>
   );
 }
