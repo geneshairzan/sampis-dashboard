@@ -70,6 +70,7 @@ function RenderList({ data, onReset }) {
   function rawmap(d, ix) {
     return {
       _ix: ix,
+      id: h.date.id,
       name: d.title,
       path: d.url,
       checked: false,

@@ -15,9 +15,9 @@ export default function App({ data }) {
       pos:
         contextMenu === null
           ? {
-            mouseX: event.clientX + 2,
-            mouseY: event.clientY - 6,
-          }
+              mouseX: event.clientX + 2,
+              mouseY: event.clientY - 6,
+            }
           : null,
     });
   };
@@ -28,12 +28,12 @@ export default function App({ data }) {
   return (
     <Stack direction={"row"} spacing={2} maxWidth={"100vw"} overflow="auto">
       {data?.map((d, ix) => (
-        <IconBtn key={ix} title={d.name} to={d.path} onContextMenu={(e) => handleContextMenu(e, d)} />
+        <>
+          {console.log(d)}{" "}
+          <IconBtn key={ix} title={d.name} to={d.path} onContextMenu={(e) => handleContextMenu(e, d)} />
+        </>
       ))}
-      <ContextMenu
-        contextMenu={contextMenu}
-        onClose={handleClose}
-      />
+      <ContextMenu contextMenu={contextMenu} onClose={handleClose} />
     </Stack>
   );
 }
