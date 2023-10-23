@@ -46,12 +46,10 @@ export default function App() {
   }
 
   function onDragStart(e) {
-    console.log(e.target.parentElement);
     e.target?.id && setonDrag(e.target.id);
   }
 
   function onDragEnd() {
-    console.log(bmBuffer);
     setonDrag();
     bm.set([...bmBuffer]);
   }
@@ -63,34 +61,17 @@ export default function App() {
         .filter((d) => !d.group || d.group == 0)
         .sort((a, b) => (a.order > b.order ? -1 : 1))
         .map((d, ix) => (
-          <UI.Col
+          <IconBtn
             key={ix}
-            // position="relative"
-            // draggable={true}
-            sx={
-              {
-                // backgroundColor: onDrag == d.order ? "#bf3e07" : "",
-                // zIndexL: 9999,
-                // pointerEvents: "auto",
-                // borderRadius: 1,
-                // border: "1px solid red",
-                // "& *": {
-                //   pointerEvents: onDrag && "none",
-                // },
-              }
-            }
-          >
-            <IconBtn
-              id={d.order}
-              onDrag={onDrag}
-              onDragEnd={onDragEnd}
-              onDragOver={onDragOver}
-              onDragStart={onDragStart}
-              title={d.name}
-              to={d.path}
-              onContextMenu={(e) => handleContextMenu(e, d)}
-            />
-          </UI.Col>
+            id={d.order}
+            onDrag={onDrag}
+            onDragEnd={onDragEnd}
+            onDragOver={onDragOver}
+            onDragStart={onDragStart}
+            title={d.name}
+            to={d.path}
+            onContextMenu={(e) => handleContextMenu(e, d)}
+          />
         ))}
       <ContextMenu contextMenu={contextMenu} onClose={handleClose} />
     </Stack>
