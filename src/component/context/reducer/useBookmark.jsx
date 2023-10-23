@@ -38,6 +38,10 @@ export default function App() {
     }
   }
 
+  function getFolder(name) {
+    return data.filter((d) => d.isFolder).find((d) => d.name = name);
+  }
+
   useEffect(() => {
     localStorage.setItem("bookmark", JSON.stringify(data));
   }, [data]);
@@ -48,6 +52,7 @@ export default function App() {
     pop,
     edit,
     set,
+    getFolder,
     reset: () => set(default_bookmark),
   };
 }

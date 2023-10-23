@@ -14,6 +14,7 @@ import Qrcode from "./inputBarcode";
 import BMGroup from "./selectGroup";
 import SearchTag from "./inputSearchTag";
 import Select from "./inputSelect";
+import InputFolder from "./inputFolder";
 
 const Form = {
   Text,
@@ -31,6 +32,7 @@ const Form = {
   BMGroup,
   SearchTag,
   Select,
+  InputFolder,
 };
 
 export default Form;
