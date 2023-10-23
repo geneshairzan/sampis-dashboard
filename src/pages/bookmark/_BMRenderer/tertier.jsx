@@ -11,7 +11,7 @@ import Context from "@context";
 import { ary, parseInt } from "lodash";
 import ReorderIcon from "@mui/icons-material/Reorder";
 
-export default function App({ data, search }) {
+export default function App({ search }) {
   const { bm } = React.useContext(Context);
   const [contextMenu, setContextMenu] = React.useState(null);
   const [onDrag, setonDrag] = useState();
@@ -41,7 +41,7 @@ export default function App({ data, search }) {
   const handleClose = () => setContextMenu(null);
 
   function onDragOver(e) {
-    if (e.target?.id) {
+    if (e.target?.id && onDrag != e.target?.id) {
       let a = parseInt(onDrag);
       let b = parseInt(e.target.id);
       let ixa = bmBuffer.findIndex((d) => d.order == a);
