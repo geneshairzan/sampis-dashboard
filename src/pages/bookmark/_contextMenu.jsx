@@ -12,7 +12,7 @@ export default function App({ contextMenu, onClose, primary = false }) {
 
   return (
     <>
-      {!onEdit && contextMenu?.pos && (
+      {!onEdit && contextMenu?.pos && !contextMenu.data.isFolder && (
         <Menu
           open={contextMenu?.pos !== null}
           onClose={onClose}

@@ -15,9 +15,8 @@ import Context from "@context";
 //   /^((http|https):\/\/)?(www.)?(?!.*(http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+(\/)?.([\w\?[a-zA-Z-_%\/@?]+)*([^\/\w\?[a-zA-Z0-9_-]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/;
 
 const isValidUrl = (url) => {
-  if (url.includes("https://localhost") || url.includes("http://localhost")) return true;
-
   try {
+    if (url.includes("https://localhost") || url.includes("http://localhost")) return true;
     new URL(url);
   } catch (e) {
     return false;
@@ -45,7 +44,20 @@ export default function NewForm({ onClose, refdata, primary }) {
     },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      refdata ? bm.edit(values) : bm.push(values);
+      if (values.folder) {
+        if (refdata) {
+
+        } else {
+          let folderObject = bm.getFolder(values.folder);
+          if (folderObject) {
+            const { folder, ...rest } = values;
+            folderObject.bookmarks.push(rest);
+            bm.edit(folderObject);
+          }
+        }
+      } else {
+        refdata ? bm.edit(values) : bm.push(values);
+      }
       onClose(true);
     },
   });
@@ -103,6 +115,17 @@ export default function NewForm({ onClose, refdata, primary }) {
               error={formik.touched.group && Boolean(formik.errors.group)}
               helperText={formik.touched.group && formik.errors.group}
             />
+
+            <Form.InputFolder
+              label="Folder"
+              name="folder"
+              value={formik.values.folder}
+              options={bm.data?.filter((bm) => bm.isFolder) || []}
+              onChange={formik.handleChange}
+              error={formik.touched.folder && Boolean(formik.errors.folder)}
+              helperText={formik.touched.folder && formik.errors.folder}
+            />
+
             <Form.Checkbox
               label="show in dashboard"
               name="isShow"
