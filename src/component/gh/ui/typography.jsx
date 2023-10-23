@@ -67,6 +67,7 @@ export function Elipsis({ children, sx, bold = false, ...props }) {
   return (
     <TextOverflow tip={children}>
       <Typography
+        draggable={false}
         sx={{
           overflow: "hidden",
           textOverflow: "ellipsis",

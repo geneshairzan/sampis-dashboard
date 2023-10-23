@@ -3,16 +3,19 @@ import React, { useState, useEffect } from "react";
 import { Stack, Typography, Menu, MenuItem } from "@mui/material";
 import UI from "@gh/ui";
 import IconBtn from "@component/app/bookmark/iconBtn";
+import Dragable from "@gh/ui/dragable";
 import Form from "../_newBookmark/_form";
 import ContextMenu from "../_contextMenu";
 import FolderIcon from "@mui/icons-material/FolderRounded";
+import Context from "@context";
+import { ary, parseInt } from "lodash";
+import ReorderIcon from "@mui/icons-material/Reorder";
 
 export default function App({ data, search }) {
+  const { bm } = React.useContext(Context);
   const [contextMenu, setContextMenu] = React.useState(null);
-
-  useState(() => {
-    data && console.log(data);
-  }, [data]);
+  const [onDrag, setonDrag] = useState();
+  const [bmBuffer, setbmBuffer] = useState(bm.data);
 
   function fnSearch(e) {
     if (!search) return e.isShow;
@@ -22,7 +25,6 @@ export default function App({ data, search }) {
   }
 
   const handleContextMenu = (event, d) => {
-    console.log("handleContextMenu", event, d);
     event.preventDefault();
     setContextMenu({
       data: { ...d },
@@ -38,19 +40,74 @@ export default function App({ data, search }) {
 
   const handleClose = () => setContextMenu(null);
 
+  function onDragOver(e) {
+    if (e.target?.id) {
+      let a = parseInt(onDrag);
+      let b = parseInt(e.target.id);
+      let ixa = bmBuffer.findIndex((d) => d.order == a);
+      let ixb = bmBuffer.findIndex((d) => d.order == b);
+
+      if (ixa != ixb) {
+        let temp = bm.data;
+        [temp[ixa].order, temp[ixb].order] = [temp[ixb].order, temp[ixa].order];
+        setbmBuffer([...temp]);
+        setonDrag(b);
+      }
+    }
+  }
+
+  function onDragStart(e) {
+    e.target?.id && setonDrag(e.target.id);
+  }
+
+  function onDragEnd() {
+    setonDrag();
+    bm.set([...bmBuffer]);
+  }
+
   return (
     <UI.Col>
       <UI.Grid container spacing={2}>
-        {data
-          ?.filter(fnSearch)
+        {bmBuffer
+          ?.filter((d) => d.group == 1 || d.isFolder)
+          .filter(fnSearch)
           .sort((a, b) => (a.path > b.path ? -1 : 1))
+          .sort((a, b) => (a.order > b.order ? -1 : 1))
           .map((d, ix) => (
-            <UI.Grid item xs={12} sm={6} md={3} xl={2} key={ix}>
-              {d.isFolder ? (
-                <RenderMultiple d={d} ix={ix} handleContextMenu={handleContextMenu} />
-              ) : (
-                <RenderSingle d={d} ix={ix} handleContextMenu={handleContextMenu} />
-              )}
+            <UI.Grid
+              item
+              xs={12}
+              sm={6}
+              md={3}
+              xl={2}
+              key={ix}
+              sx={{
+                pointerEvents: "none",
+              }}
+            >
+              <UI.Col
+                position="relative"
+                draggable={true}
+                id={d.order}
+                onDragEnd={onDragEnd}
+                onDragOver={onDragOver}
+                onDragStart={onDragStart}
+                sx={{
+                  backgroundColor: onDrag == d.order && "#bf3e07",
+                  zIndexL: 9999,
+                  pointerEvents: "auto",
+                  borderRadius: 1,
+                  "& *": {
+                    pointerEvents: onDrag && "none",
+                  },
+                }}
+              >
+                {d.isFolder ? (
+                  <RenderMultiple d={d} ix={ix} handleContextMenu={handleContextMenu} />
+                ) : (
+                  <RenderSingle d={d} ix={ix} handleContextMenu={handleContextMenu} />
+                )}
+              </UI.Col>
             </UI.Grid>
           ))}
         <ContextMenu contextMenu={contextMenu} onClose={handleClose} />
@@ -70,6 +127,7 @@ function RenderSingle({ d, ix, parent = null, disableBorder = false, handleConte
     <UI.Row
       onContextMenu={(e) => handleContextMenu(e, { ...d, parent: parent })}
       // onContextMenu={(e) => handleContextMenu(e, d)}
+      draggable={false}
       key={ix}
       component="a"
       href={d.path}

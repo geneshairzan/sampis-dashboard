@@ -39,7 +39,7 @@ export default function App() {
   }
 
   function getFolder(name) {
-    return data.filter((d) => d.isFolder).find((d) => d.name = name);
+    return data.filter((d) => d.isFolder).find((d) => (d.name = name));
   }
 
   useEffect(() => {
