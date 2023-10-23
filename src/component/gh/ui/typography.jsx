@@ -63,7 +63,7 @@ export function TextOverflow({ children, tip }) {
   );
 }
 
-export function Elipsis({ children, sx, ...props }) {
+export function Elipsis({ children, sx, bold = false, ...props }) {
   return (
     <TextOverflow tip={children}>
       <Typography
@@ -73,6 +73,8 @@ export function Elipsis({ children, sx, ...props }) {
           display: "-webkit-box",
           WebkitLineClamp: "1",
           WebkitBoxOrient: "vertical",
+          fontWeight: bold ? 600 : "",
+
           ...sx,
         }}
         {...props}

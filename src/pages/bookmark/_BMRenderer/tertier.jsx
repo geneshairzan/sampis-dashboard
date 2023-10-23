@@ -5,7 +5,7 @@ import UI from "@gh/ui";
 import IconBtn from "@component/app/bookmark/iconBtn";
 import Form from "../_newBookmark/_form";
 import ContextMenu from "../_contextMenu";
-import FolderIcon from '@mui/icons-material/FolderRounded';
+import FolderIcon from "@mui/icons-material/FolderRounded";
 
 export default function App({ data, search }) {
   const [contextMenu, setContextMenu] = React.useState(null);
@@ -22,15 +22,16 @@ export default function App({ data, search }) {
   }
 
   const handleContextMenu = (event, d) => {
+    console.log("handleContextMenu", event, d);
     event.preventDefault();
     setContextMenu({
-      data: d,
+      data: { ...d },
       pos:
         contextMenu === null
           ? {
-            mouseX: event.clientX + 2,
-            mouseY: event.clientY - 6,
-          }
+              mouseX: event.clientX + 2,
+              mouseY: event.clientY - 6,
+            }
           : null,
     });
   };
@@ -45,7 +46,11 @@ export default function App({ data, search }) {
           .sort((a, b) => (a.path > b.path ? -1 : 1))
           .map((d, ix) => (
             <UI.Grid item xs={12} sm={6} md={3} xl={2} key={ix}>
-              {d.isFolder ? (<RenderMultiple d={d} ix={ix} handleContextMenu={handleContextMenu} />) : (<RenderSingle d={d} ix={ix} handleContextMenu={handleContextMenu} />)}
+              {d.isFolder ? (
+                <RenderMultiple d={d} ix={ix} handleContextMenu={handleContextMenu} />
+              ) : (
+                <RenderSingle d={d} ix={ix} handleContextMenu={handleContextMenu} />
+              )}
             </UI.Grid>
           ))}
         <ContextMenu contextMenu={contextMenu} onClose={handleClose} />
@@ -60,10 +65,11 @@ function getDomain(url) {
   return domain?.hostname;
 }
 
-function RenderSingle({ d, ix, handleContextMenu }) {
+function RenderSingle({ d, ix, parent = null, disableBorder = false, handleContextMenu }) {
   return (
     <UI.Row
-      onContextMenu={(e) => handleContextMenu(e, d)}
+      onContextMenu={(e) => handleContextMenu(e, { ...d, parent: parent })}
+      // onContextMenu={(e) => handleContextMenu(e, d)}
       key={ix}
       component="a"
       href={d.path}
@@ -75,11 +81,11 @@ function RenderSingle({ d, ix, handleContextMenu }) {
         flexShrink: 0,
         flexGrow: 1,
 
-        border: "1px solid grey",
+        border: !disableBorder && "1px solid grey",
         borderRadius: 2,
         p: 0.5,
         "&:hover": {
-          borderColor: "primary.main",
+          borderColor: !disableBorder && "primary.main",
 
           "& .BM-Title": {
             color: "primary.main",
@@ -111,6 +117,7 @@ function RenderSingle({ d, ix, handleContextMenu }) {
     </UI.Row>
   );
 }
+
 function RenderMultiple({ d, ix, handleContextMenu }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
@@ -125,7 +132,8 @@ function RenderMultiple({ d, ix, handleContextMenu }) {
   return (
     <>
       <UI.Row
-        // onContextMenu={(e) => handleContextMenu(e, d)}
+        onContextMenu={(e) => handleContextMenu(e, d)}
+        // onContextMenu={(e) => console.log(d)}
         key={ix}
         component="a"
         alignItems="center"
@@ -154,11 +162,11 @@ function RenderMultiple({ d, ix, handleContextMenu }) {
           <UI.Elipsis bold variant="body2" color={"white"} className="BM-Title">
             {d.name}
           </UI.Elipsis>
-          {!d.isFolder &&
+          {!d.isFolder && (
             <UI.Elipsis variant="caption" color={"grey"} mt={"-4px"}>
               {d.desc && d.desc}
             </UI.Elipsis>
-          }
+          )}
         </UI.Col>
       </UI.Row>
       <Menu
@@ -166,32 +174,42 @@ function RenderMultiple({ d, ix, handleContextMenu }) {
         open={open}
         onClose={handleClose}
         anchorOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
+          vertical: "top",
+          horizontal: "left",
         }}
         transformOrigin={{
-          vertical: 'top',
-          horizontal: 'left',
+          vertical: "top",
+          horizontal: "left",
         }}
         slotProps={{
           paper: {
             sx: {
-              backgroundColor: "#191d26",
+              backgroundColor: "unset",
               minWidth: 220,
               flexShrink: 0,
               flexGrow: 1,
-            }
-          }
+              ml: "48px",
+            },
+          },
         }}
         MenuListProps={{ sx: { width: anchorEl && anchorEl.offsetWidth, py: 0 } }}
         sx={{
-          p: 0,
-        }}>
-        {d.bookmarks.map((db, ii, arr) => (
-          <MenuItem sx={{ px: 0, pt: 0, pb: arr.length - 1 != ii && 2, '&:hover': { backgroundColor: "#191d26", } }}>
-            <RenderSingle d={db} ix={ii} handleContextMenu={handleContextMenu} />
-          </MenuItem>
-        ))}
+          p: 1,
+          mt: -1,
+          pl: 2,
+          bgcolor: "rgba(53, 53, 53,.5)",
+        }}
+      >
+        <UI.Col p={1} pl={1} left={"30px"} sx={{ backgroundColor: "#191d26" }}>
+          {d.bookmarks.map((db, ii, arr) => (
+            <MenuItem
+              key={ii}
+              sx={{ px: 0, pt: 0, pb: arr.length - 1 != ii && 2, "&:hover": { backgroundColor: "#191d26" } }}
+            >
+              <RenderSingle d={db} ix={ii} handleContextMenu={handleContextMenu} parent={d.name} />
+            </MenuItem>
+          ))}
+        </UI.Col>
       </Menu>
     </>
   );

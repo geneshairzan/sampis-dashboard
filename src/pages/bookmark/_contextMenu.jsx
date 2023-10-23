@@ -12,7 +12,7 @@ export default function App({ contextMenu, onClose, primary = false }) {
 
   return (
     <>
-      {!onEdit && contextMenu?.pos && !contextMenu.data.isFolder && (
+      {!onEdit && contextMenu?.pos && (
         <Menu
           open={contextMenu?.pos !== null}
           onClose={onClose}
@@ -48,7 +48,6 @@ export default function App({ contextMenu, onClose, primary = false }) {
           </MenuItem>
         </Menu>
       )}
-
       {onEdit && <Form onClose={() => setonEdit()} refdata={onEdit} primary={primary} />}
     </>
   );

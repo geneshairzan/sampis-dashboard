@@ -31,22 +31,26 @@ const validationSchema = yup.object({
   path: yup.string().test("is-url-valid", "URL is not valid", (value) => isValidUrl(value)),
   group: yup.string("").required("required"),
 });
+
 export default function NewForm({ onClose, refdata, primary }) {
   const { bm } = React.useContext(Context);
-
   const formik = useFormik({
-    initialValues: refdata || {
-      id: h.date.id_time(),
-      name: "",
-      path: "",
-      group: 1,
-      isShow: true,
-    },
+    initialValues: refdata
+      ? {
+          ...refdata,
+          folder: { name: refdata.parent },
+        }
+      : {
+          id: h.date.id_time(),
+          name: "",
+          path: "",
+          group: 1,
+          isShow: true,
+        },
     validationSchema: validationSchema,
     onSubmit: (values) => {
       if (values.folder) {
         if (refdata) {
-
         } else {
           let folderObject = bm.getFolder(values.folder);
           if (folderObject) {
@@ -61,6 +65,8 @@ export default function NewForm({ onClose, refdata, primary }) {
       onClose(true);
     },
   });
+
+  console.log(formik.values);
   return (
     <UI.Modal open={true}>
       <UI.Col
