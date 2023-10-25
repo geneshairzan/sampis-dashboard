@@ -22,7 +22,8 @@ export default function InputFolder({ name, value, options, onChange, noLabel, .
             id: h.date.id_time(),
             name: v,
             isFolder: true,
-            bookmarks: [],
+            group: 1,
+            isShow: true,
         });
     }
 
@@ -62,7 +63,7 @@ export default function InputFolder({ name, value, options, onChange, noLabel, .
                 getOptionLabel={(option) => {
                     // Value selected with enter, right from the input
                     if (typeof option === "string") {
-                        return option.name;
+                        return option;
                     }
                     // Add "xxx" option created dynamically
                     if (option?.inputValue) {

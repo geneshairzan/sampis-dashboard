@@ -31,9 +31,9 @@ export default function App({ search }) {
       pos:
         contextMenu === null
           ? {
-              mouseX: event.clientX + 2,
-              mouseY: event.clientY - 6,
-            }
+            mouseX: event.clientX + 2,
+            mouseY: event.clientY - 6,
+          }
           : null,
     });
   };
@@ -69,7 +69,7 @@ export default function App({ search }) {
     <UI.Col>
       <UI.Grid container spacing={2}>
         {bmBuffer
-          ?.filter((d) => d.group == 1 || d.isFolder)
+          ?.filter((d) => d.group == 1 && !d.folder)
           .filter(fnSearch)
           .sort((a, b) => (a.path > b.path ? -1 : 1))
           .sort((a, b) => (a.order > b.order ? -1 : 1))
@@ -103,7 +103,7 @@ export default function App({ search }) {
                 }}
               >
                 {d.isFolder ? (
-                  <RenderMultiple d={d} ix={ix} handleContextMenu={handleContextMenu} />
+                  <RenderMultiple d={d} ix={ix} bookmarks={bmBuffer.filter((b) => b.folder == d.name)} handleContextMenu={handleContextMenu} />
                 ) : (
                   <RenderSingle d={d} ix={ix} handleContextMenu={handleContextMenu} />
                 )}
@@ -176,12 +176,12 @@ function RenderSingle({ d, ix, parent = null, disableBorder = false, handleConte
   );
 }
 
-function RenderMultiple({ d, ix, handleContextMenu }) {
+function RenderMultiple({ d, ix, bookmarks, handleContextMenu }) {
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
 
   const handleClick = (event) => {
-    d.bookmarks.length && setAnchorEl(event.currentTarget);
+    bookmarks.length && setAnchorEl(event.currentTarget);
   };
   const handleClose = () => {
     setAnchorEl(null);
@@ -259,7 +259,7 @@ function RenderMultiple({ d, ix, handleContextMenu }) {
         }}
       >
         <UI.Col p={1} pl={1} left={"30px"} sx={{ backgroundColor: "#191d26" }}>
-          {d.bookmarks.map((db, ii, arr) => (
+          {bookmarks.map((db, ii, arr) => (
             <MenuItem
               key={ii}
               sx={{ px: 0, pt: 0, pb: arr.length - 1 != ii && 2, "&:hover": { backgroundColor: "#191d26" } }}
