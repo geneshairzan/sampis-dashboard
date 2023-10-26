@@ -28,7 +28,11 @@ const validationSchema = yup.object({
   name: yup.string("").required("required"),
   // path: yup.string().matches(URL, 'Enter valid url!').required("required"),
   // path: yup.string().matches(regMatch, "Enter correct url!").required("required"),
-  path: yup.string().test("is-url-valid", "URL is not valid", (value) => isValidUrl(value)),
+  path: yup.string().when("isFolder", {
+    is: true,
+    then: () => yup.string().nullable(),
+    otherwise: () => yup.string().test("is-url-valid", "URL is not valid", (value) => isValidUrl(value)),
+  }),
   group: yup.string("").required("required"),
 });
 
@@ -37,36 +41,27 @@ export default function NewForm({ onClose, refdata, primary }) {
   const formik = useFormik({
     initialValues: refdata
       ? {
-          ...refdata,
-          folder: { name: refdata.parent },
-        }
+        ...refdata,
+      }
       : {
-          id: h.date.id_time(),
-          name: "",
-          path: "",
-          group: 1,
-          isShow: true,
-        },
+        id: h.date.id_time(),
+        name: "",
+        path: "",
+        group: 1,
+        isShow: true,
+      },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      if (values.folder) {
-        if (refdata) {
-        } else {
-          let folderObject = bm.getFolder(values.folder);
-          if (folderObject) {
-            const { folder, ...rest } = values;
-            folderObject.bookmarks.push(rest);
-            bm.edit(folderObject);
-          }
-        }
-      } else {
-        refdata ? bm.edit(values) : bm.push(values);
-      }
+      console.log(values);
+      refdata ? bm.edit(values) : bm.push(values);
       onClose(true);
     },
   });
 
-  console.log(formik.values);
+  useEffect(() => {
+    console.log(refdata);
+  }, [refdata]);
+
   return (
     <UI.Modal open={true}>
       <UI.Col
@@ -79,7 +74,7 @@ export default function NewForm({ onClose, refdata, primary }) {
       >
         <UI.Row justifyContent="space-between">
           <UI.Text variant="h4" color="primary" bold>
-            {refdata ? "Edit Bookmark" : "New Bookmark"}
+            {refdata ? refdata.isFolder ? "Edit Bookmark Folder" : "Edit Bookmark" : "New Bookmark"}
           </UI.Text>
           <UI.IconButton onClick={onClose}>
             <Icon.Close />
@@ -94,14 +89,16 @@ export default function NewForm({ onClose, refdata, primary }) {
           helperText={formik.touched.name && formik.errors.name}
         />
 
-        <Form.Text
-          label="path"
-          name="path"
-          value={formik.values.path}
-          onChange={formik.handleChange}
-          error={formik.touched.path && Boolean(formik.errors.path)}
-          helperText={formik.touched.path && formik.errors.path}
-        />
+        {!refdata?.isFolder &&
+          <Form.Text
+            label="path"
+            name="path"
+            value={formik.values.path}
+            onChange={formik.handleChange}
+            error={formik.touched.path && Boolean(formik.errors.path)}
+            helperText={formik.touched.path && formik.errors.path}
+          />
+        }
         {!primary && (
           <>
             <Form.Text
