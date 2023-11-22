@@ -31,9 +31,9 @@ export default function App({ search }) {
       pos:
         contextMenu === null
           ? {
-            mouseX: event.clientX + 2,
-            mouseY: event.clientY - 6,
-          }
+              mouseX: event.clientX + 2,
+              mouseY: event.clientY - 6,
+            }
           : null,
     });
   };
@@ -64,6 +64,10 @@ export default function App({ search }) {
     setonDrag();
     bm.set([...bmBuffer]);
   }
+
+  useEffect(() => {
+    setbmBuffer(bm.data);
+  }, [bm]);
 
   return (
     <UI.Col>
@@ -103,7 +107,12 @@ export default function App({ search }) {
                 }}
               >
                 {d.isFolder ? (
-                  <RenderMultiple d={d} ix={ix} bookmarks={bmBuffer.filter((b) => b.folder == d.name)} handleContextMenu={handleContextMenu} />
+                  <RenderMultiple
+                    d={d}
+                    ix={ix}
+                    bookmarks={bmBuffer.filter((b) => b.folder == d.name)}
+                    handleContextMenu={handleContextMenu}
+                  />
                 ) : (
                   <RenderSingle d={d} ix={ix} handleContextMenu={handleContextMenu} />
                 )}

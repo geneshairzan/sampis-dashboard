@@ -37,7 +37,7 @@ export default function App({ contextMenu, onClose, primary = false }) {
           <MenuItem
             disabled={primary}
             onClick={() => {
-              bm.pop(contextMenu.data);
+              contextMenu?.data?.isFolder ? bm.popFolder(contextMenu.data) : bm.pop(contextMenu.data);
               onClose();
             }}
             sx={{

@@ -41,26 +41,23 @@ export default function NewForm({ onClose, refdata, primary }) {
   const formik = useFormik({
     initialValues: refdata
       ? {
-        ...refdata,
-      }
+          ...refdata,
+          order: refdata.order || bm.data.length + 1,
+        }
       : {
-        id: h.date.id_time(),
-        name: "",
-        path: "",
-        group: 1,
-        isShow: true,
-      },
+          id: h.date.id_time(),
+          name: "",
+          path: "https://stackoverflow.com/questions/46460951/how-to-change-multiple-objects-inside-an-array",
+          group: 1,
+          isShow: true,
+          order: bm.data.length + 1,
+        },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      console.log(values);
       refdata ? bm.edit(values) : bm.push(values);
       onClose(true);
     },
   });
-
-  useEffect(() => {
-    console.log(refdata);
-  }, [refdata]);
 
   return (
     <UI.Modal open={true}>
@@ -74,7 +71,7 @@ export default function NewForm({ onClose, refdata, primary }) {
       >
         <UI.Row justifyContent="space-between">
           <UI.Text variant="h4" color="primary" bold>
-            {refdata ? refdata.isFolder ? "Edit Bookmark Folder" : "Edit Bookmark" : "New Bookmark"}
+            {refdata ? (refdata.isFolder ? "Edit Bookmark Folder" : "Edit Bookmark") : "New Bookmark"}
           </UI.Text>
           <UI.IconButton onClick={onClose}>
             <Icon.Close />
@@ -89,7 +86,7 @@ export default function NewForm({ onClose, refdata, primary }) {
           helperText={formik.touched.name && formik.errors.name}
         />
 
-        {!refdata?.isFolder &&
+        {!refdata?.isFolder && (
           <Form.Text
             label="path"
             name="path"
@@ -98,7 +95,7 @@ export default function NewForm({ onClose, refdata, primary }) {
             error={formik.touched.path && Boolean(formik.errors.path)}
             helperText={formik.touched.path && formik.errors.path}
           />
-        }
+        )}
         {!primary && (
           <>
             <Form.Text
