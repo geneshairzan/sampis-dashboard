@@ -23,7 +23,6 @@ export default function App({ contextMenu, onClose, primary = false }) {
         >
           <MenuItem
             onClick={() => {
-              console.log(contextMenu);
               setonEdit(contextMenu.data);
               onClose();
             }}

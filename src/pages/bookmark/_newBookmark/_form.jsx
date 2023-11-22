@@ -42,7 +42,7 @@ export default function NewForm({ onClose, refdata, primary }) {
     initialValues: refdata
       ? {
           ...refdata,
-          order: refdata.order || bm.data.length + 1,
+          order: refdata.order || h.getLastOrder(bm.data),
         }
       : {
           id: h.date.id_time(),
@@ -50,7 +50,7 @@ export default function NewForm({ onClose, refdata, primary }) {
           path: "https://stackoverflow.com/questions/46460951/how-to-change-multiple-objects-inside-an-array",
           group: 1,
           isShow: true,
-          order: bm.data.length + 1,
+          order: h.getLastOrder(bm.data),
         },
     validationSchema: validationSchema,
     onSubmit: (values) => {

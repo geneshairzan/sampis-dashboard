@@ -23,7 +23,7 @@ export default function InputFolder({ name, value, options, onChange, noLabel, .
       isFolder: true,
       group: 1,
       isShow: true,
-      order: bm.data.length + 1,
+      order: h.getLastOrder(bm.data),
     });
   }
 

@@ -42,12 +42,14 @@ export default function App({ search }) {
 
   function onDragOver(e) {
     if (e.target?.id && onDrag != e.target?.id) {
+      console.log("drag over");
+
       let a = parseInt(onDrag);
       let b = parseInt(e.target.id);
       let ixa = bmBuffer.findIndex((d) => d.order == a);
       let ixb = bmBuffer.findIndex((d) => d.order == b);
-
       if (ixa != ixb) {
+        console.log("switched");
         let temp = bm.data;
         [temp[ixa].order, temp[ixb].order] = [temp[ixb].order, temp[ixa].order];
         setbmBuffer([...temp]);
@@ -206,6 +208,7 @@ function RenderMultiple({ d, ix, bookmarks, handleContextMenu }) {
         alignItems="center"
         spacing={2}
         onClick={handleClick}
+        draggable={false}
         sx={{
           minWidth: 220,
           width: "100%",
