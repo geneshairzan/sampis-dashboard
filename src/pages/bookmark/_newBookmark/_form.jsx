@@ -47,14 +47,14 @@ export default function NewForm({ onClose, refdata, primary }) {
       : {
           id: h.date.id_time(),
           name: "",
-          path: "https://stackoverflow.com/questions/46460951/how-to-change-multiple-objects-inside-an-array",
+          path: "",
           group: 1,
           isShow: true,
           order: h.getLastOrder(bm.data),
         },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      refdata ? bm.edit(values) : bm.push(values);
+      bm.push(values);
       onClose(true);
     },
   });
