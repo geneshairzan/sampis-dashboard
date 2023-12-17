@@ -8,7 +8,7 @@ import SearchIcon from "@mui/icons-material/Search";
 import Context from "@context";
 import Setting from "./_settings";
 
-import { useBool } from "gh-usereact/hook";
+import { useBool } from "@gendev/hook";
 
 export default function App(props) {
   const { app } = React.useContext(Context);

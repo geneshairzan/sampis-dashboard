@@ -15,9 +15,8 @@ import Context from "@context";
 //   /^((http|https):\/\/)?(www.)?(?!.*(http|https|www.))[a-zA-Z0-9_-]+(\.[a-zA-Z]+)+(\/)?.([\w\?[a-zA-Z-_%\/@?]+)*([^\/\w\?[a-zA-Z0-9_-]+=\w+(&[a-zA-Z0-9_]+=\w+)*)?$/;
 
 const isValidUrl = (url) => {
-  if (url.includes("https://localhost") || url.includes("http://localhost")) return true;
-
   try {
+    if (url.includes("https://localhost") || url.includes("http://localhost")) return true;
     new URL(url);
   } catch (e) {
     return false;
@@ -29,26 +28,37 @@ const validationSchema = yup.object({
   name: yup.string("").required("required"),
   // path: yup.string().matches(URL, 'Enter valid url!').required("required"),
   // path: yup.string().matches(regMatch, "Enter correct url!").required("required"),
-  path: yup.string().test("is-url-valid", "URL is not valid", (value) => isValidUrl(value)),
+  path: yup.string().when("isFolder", {
+    is: true,
+    then: () => yup.string().nullable(),
+    otherwise: () => yup.string().test("is-url-valid", "URL is not valid", (value) => isValidUrl(value)),
+  }),
   group: yup.string("").required("required"),
 });
+
 export default function NewForm({ onClose, refdata, primary }) {
   const { bm } = React.useContext(Context);
-
   const formik = useFormik({
-    initialValues: refdata || {
-      id: h.date.id_time(),
-      name: "",
-      path: "",
-      group: 1,
-      isShow: true,
-    },
+    initialValues: refdata
+      ? {
+          ...refdata,
+          order: refdata.order || h.getLastOrder(bm.data),
+        }
+      : {
+          id: h.date.id_time(),
+          name: "",
+          path: "",
+          group: 1,
+          isShow: true,
+          order: h.getLastOrder(bm.data),
+        },
     validationSchema: validationSchema,
     onSubmit: (values) => {
-      refdata ? bm.edit(values) : bm.push(values);
+      bm.push(values);
       onClose(true);
     },
   });
+
   return (
     <UI.Modal open={true}>
       <UI.Col
@@ -61,7 +71,7 @@ export default function NewForm({ onClose, refdata, primary }) {
       >
         <UI.Row justifyContent="space-between">
           <UI.Text variant="h4" color="primary" bold>
-            {refdata ? "Edit Bookmark" : "New Bookmark"}
+            {refdata ? (refdata.isFolder ? "Edit Bookmark Folder" : "Edit Bookmark") : "New Bookmark"}
           </UI.Text>
           <UI.IconButton onClick={onClose}>
             <Icon.Close />
@@ -76,14 +86,16 @@ export default function NewForm({ onClose, refdata, primary }) {
           helperText={formik.touched.name && formik.errors.name}
         />
 
-        <Form.Text
-          label="path"
-          name="path"
-          value={formik.values.path}
-          onChange={formik.handleChange}
-          error={formik.touched.path && Boolean(formik.errors.path)}
-          helperText={formik.touched.path && formik.errors.path}
-        />
+        {!refdata?.isFolder && (
+          <Form.Text
+            label="path"
+            name="path"
+            value={formik.values.path}
+            onChange={formik.handleChange}
+            error={formik.touched.path && Boolean(formik.errors.path)}
+            helperText={formik.touched.path && formik.errors.path}
+          />
+        )}
         {!primary && (
           <>
             <Form.Text
@@ -103,6 +115,17 @@ export default function NewForm({ onClose, refdata, primary }) {
               error={formik.touched.group && Boolean(formik.errors.group)}
               helperText={formik.touched.group && formik.errors.group}
             />
+
+            <Form.InputFolder
+              label="Folder"
+              name="folder"
+              value={formik.values.folder}
+              options={bm.data?.filter((bm) => bm.isFolder) || []}
+              onChange={formik.handleChange}
+              error={formik.touched.folder && Boolean(formik.errors.folder)}
+              helperText={formik.touched.folder && formik.errors.folder}
+            />
+
             <Form.Checkbox
               label="show in dashboard"
               name="isShow"

@@ -16,26 +16,47 @@ export default function App() {
   const [data, set] = useState(localStorage?.getItem("bookmark") ? getCache("bookmark") : default_bookmark);
 
   function push(val) {
-    let temp = [...data, val];
-    set(temp);
-  }
-
-  function edit(val) {
     let index = data.findIndex((d) => d.id == val.id);
     if (index >= 0) {
       let temp = data;
+
+      let oldFolderName = temp[index].name;
       temp[index] = val;
+      if (oldFolderName) {
+        temp = temp.map((d) => {
+          return d.folder == oldFolderName ? { ...d, folder: val.name } : d;
+        });
+      }
       set([...temp]);
+    } else {
+      set([...data, val]);
     }
   }
 
   function pop(val) {
+    //dsad
     let index = data.findIndex((d) => d.id == val.id);
     if (index >= 0) {
       let temp = data;
       temp.splice(index, 1);
       set([...temp]);
     }
+  }
+
+  function popFolder(val) {
+    let index = data.findIndex((d) => d.id == val.id);
+    if (index >= 0) {
+      let temp = data;
+      temp.splice(index, 1);
+      let remap = temp.map((d) => {
+        return d.folder == val.name ? { ...d, folder: "" } : d;
+      });
+      set([...remap]);
+    }
+  }
+
+  function getFolder(name) {
+    return data.filter((d) => d.isFolder).find((d) => (d.name = name));
   }
 
   useEffect(() => {
@@ -46,8 +67,9 @@ export default function App() {
     data,
     push,
     pop,
-    edit,
+    popFolder,
     set,
+    getFolder,
     reset: () => set(default_bookmark),
   };
 }

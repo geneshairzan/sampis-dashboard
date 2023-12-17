@@ -23,7 +23,6 @@ export default function App({ contextMenu, onClose, primary = false }) {
         >
           <MenuItem
             onClick={() => {
-              console.log(contextMenu);
               setonEdit(contextMenu.data);
               onClose();
             }}
@@ -37,7 +36,7 @@ export default function App({ contextMenu, onClose, primary = false }) {
           <MenuItem
             disabled={primary}
             onClick={() => {
-              bm.pop(contextMenu.data);
+              contextMenu?.data?.isFolder ? bm.popFolder(contextMenu.data) : bm.pop(contextMenu.data);
               onClose();
             }}
             sx={{
@@ -48,7 +47,6 @@ export default function App({ contextMenu, onClose, primary = false }) {
           </MenuItem>
         </Menu>
       )}
-
       {onEdit && <Form onClose={() => setonEdit()} refdata={onEdit} primary={primary} />}
     </>
   );
