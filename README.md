@@ -7,7 +7,7 @@
 this aplication still under continues developtment which will add more and more feature coming up soon. (might contain bugs, in short 0_o )<br>
 but yes, this is fully functional already. :) <br>
 installation ? you no need to install anything. <br>
-use it directly at [dashboard.genesha.dev](https://dashboard.genesha.dev){:target="\_blank"}
+use it directly at [dashboard.genesha.dev](https://dashboard.genesha.dev)
 
 leettss gooo... !!!
 
@@ -26,7 +26,7 @@ leettss gooo... !!!
 4. **auto icon**<br/>
    auto detect the icon based on url path
 
-5. **more at [youtube.com](https://youtube.com){:target="\_blank"}**<br/>
+5. **more at [youtube.com](https://youtube.com)**<br/>
    trust me, iam not typical writing guy.
 
 # Installation
@@ -45,11 +45,11 @@ if you insist to install your self, you can self deploy this aplication thru :
 
 # On Dev
 
-- dragable orderable bookmark
+- dragable orderable bookmark ✅
 - custom icon
 - multiple timezone
 - import from chrome ✅
 - theming
 - bg-img
-- stackable / folder bookmark
+- stackable / folder bookmark ✅
 - layouting advance config ✅
