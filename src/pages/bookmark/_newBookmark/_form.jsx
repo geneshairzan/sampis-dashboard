@@ -59,6 +59,14 @@ export default function NewForm({ onClose, refdata, primary }) {
     },
   });
 
+  function handlePathInput(e) {
+    let temp = e.target.value;
+    if (temp?.length > 3 && temp.includes(".") && !temp.includes("https://")) {
+      temp = "https://" + temp;
+    }
+    formik.setFieldValue("path", temp);
+  }
+
   return (
     <UI.Modal open={true}>
       <UI.Col
@@ -91,7 +99,7 @@ export default function NewForm({ onClose, refdata, primary }) {
             label="path"
             name="path"
             value={formik.values.path}
-            onChange={formik.handleChange}
+            onChange={handlePathInput}
             error={formik.touched.path && Boolean(formik.errors.path)}
             helperText={formik.touched.path && formik.errors.path}
           />
