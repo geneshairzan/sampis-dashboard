@@ -30,7 +30,7 @@ export default function FreeSoloCreateOption({ name, value, onChange, noLabel, .
           const filtered = filter(options, params);
           const { inputValue } = params;
           // Suggest the creation of a new value
-          const isExisting = options.some((option) => inputValue === option);
+          const isExisting = options.some((option) => inputValue === option.name);
           if (inputValue !== "" && !isExisting) {
             filtered.push({
               inputValue: inputValue,
