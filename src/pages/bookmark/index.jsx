@@ -17,6 +17,7 @@ export default function App(props) {
   return (
     <UI.Col spacing={5}>
       <Clock isShowPrayer={app.isShowPrayer} />
+      <GDocs />
       <BMPrimary data={bm.data.filter((d) => d.group == -1)} />
       <BMSecondary data={bm.data.filter((d) => !d.group || d.group == 0)} />
       <Search value={search} onChange={setsearch} />
@@ -28,5 +29,52 @@ export default function App(props) {
         </UI.Row>
       </UI.Col>
     </UI.Col>
+  );
+}
+
+function GDocs(params) {
+  const style = { px: 2, py: 1, borderRadius: 2, width: 80 };
+  return (
+    <UI.Row gap={2}>
+      <UI.Col
+        sx={{
+          ...style,
+          bgcolor: "#00ac47",
+        }}
+        center
+        component="a"
+        href="https://sheet.new/"
+      >
+        <UI.Text variant="body1" color="white">
+          + Sheet
+        </UI.Text>
+      </UI.Col>
+      <UI.Col
+        sx={{
+          ...style,
+          bgcolor: "#2684fc",
+        }}
+        center
+        component="a"
+        href="https://docs.new/"
+      >
+        <UI.Text variant="body1" color="white">
+          + Doc
+        </UI.Text>
+      </UI.Col>
+      <UI.Col
+        sx={{
+          ...style,
+          bgcolor: "#ffba00",
+        }}
+        center
+        component="a"
+        href="https://docs.new/"
+      >
+        <UI.Text variant="body1" color="white">
+          + Slide
+        </UI.Text>
+      </UI.Col>
+    </UI.Row>
   );
 }
